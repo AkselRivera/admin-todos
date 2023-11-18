@@ -22,6 +22,17 @@ npx prisma generate
 
 7. Ejecutar el SEED para [crear la base de datos](http://localhost:3000/api/seed)
 
+- Opcional:
+  Para actualizar dependencias
+
+```
+npm i -g npm-check-updates
+
+ncu
+
+ncu --upgrade
+```
+
 # Prisma commands
 
 ```

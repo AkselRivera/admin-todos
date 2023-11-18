@@ -18,7 +18,7 @@ const navLinks = [
   },
   {
     title: 'Server Actions',
-    href: '/dashboard/server-actions',
+    href: '/dashboard/server-todos',
     icon: <IoListOutline />,
   },
 ]
@@ -33,6 +33,7 @@ export const Sidebar = () => {
               className="w-32"
               src="https://tailus.io/sources/blocks/stats-cards/preview/images/logo.svg"
               alt="tailus logo"
+              priority={true}
               width={100}
               height={100}
             />
@@ -44,8 +45,8 @@ export const Sidebar = () => {
             src="https://tailus.io/sources/blocks/stats-cards/preview/images/second_user.webp"
             alt=""
             className="w-10 h-10 m-auto rounded-full object-cover lg:w-28 lg:h-28"
-            width={50}
-            height={50}
+            width={100}
+            height={100}
           />
           <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">
             Cynthia J. Watts

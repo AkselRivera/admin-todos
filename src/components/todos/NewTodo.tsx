@@ -1,27 +1,28 @@
 'use client'
 
-import * as TodoApi from '@/todos/helpers/todo'
-import { useRouter } from 'next/navigation'
 import { FormEvent, useState } from 'react'
 import { IoTrashOutline } from 'react-icons/io5'
+// * Client request
+// import { useRouter } from 'next/navigation'
+// import * as TodoApi from '@/todos/helpers/todo'
+// * Server request
+import { addTodo, deleteCompleted } from '@/todos/actions/todo-actions'
 
 export const NewTodo = () => {
   const [description, setDescription] = useState('')
-
-  const router = useRouter()
-
+  // const router = useRouter()
   async function onSumbit(e: FormEvent) {
     e.preventDefault()
 
     if (description.length < 3) return
-    await TodoApi.createTodo(description)
-    router.refresh()
+    await addTodo(description)
     setDescription('')
   }
 
   async function handleDelete() {
-    await TodoApi.deleteTodos()
-    router.refresh()
+    await deleteCompleted()
+    // await TodoApi.deleteTodos()
+    // router.refresh()
   }
 
   return (
@@ -44,7 +45,9 @@ export const NewTodo = () => {
       <span className="flex flex-1"></span>
 
       <button
-        onClick={handleDelete}
+        // * Recomendado para no enviar null o clases al server action
+        onClick={() => handleDelete()}
+        // onClick={handleDelete}
         type="button"
         className="flex gap-1 items-center justify-center text-sm rounded ml-2 bg-red-500 p-2 text-white hover:bg-red-700 transition-all"
       >
