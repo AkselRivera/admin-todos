@@ -2,7 +2,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { CiBookmarkCheck, CiLogout } from 'react-icons/ci'
 
-import { IoCalendarOutline, IoListOutline } from 'react-icons/io5'
+import {
+  IoBasketOutline,
+  IoCalendarOutline,
+  IoCodeWorkingOutline,
+  IoListOutline,
+} from 'react-icons/io5'
 import { SidebarItem } from './SidebarItem'
 
 const navLinks = [
@@ -20,6 +25,16 @@ const navLinks = [
     title: 'Server Actions',
     href: '/dashboard/server-todos',
     icon: <IoListOutline />,
+  },
+  {
+    title: 'Cookies',
+    href: '/dashboard/cookies',
+    icon: <IoCodeWorkingOutline />,
+  },
+  {
+    title: 'Products',
+    href: '/dashboard/products',
+    icon: <IoBasketOutline />,
   },
 ]
 
