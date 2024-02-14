@@ -7,8 +7,12 @@ import {
   IoCalendarOutline,
   IoCodeWorkingOutline,
   IoListOutline,
+  IoPersonOutline,
 } from 'react-icons/io5'
 import { SidebarItem } from './SidebarItem'
+import { LogoutButton } from '..'
+import { getServerSession } from 'next-auth'
+import { authOption } from '@/app/api/auth/[...nextauth]/route'
 
 const navLinks = [
   {
@@ -36,9 +40,26 @@ const navLinks = [
     href: '/dashboard/products',
     icon: <IoBasketOutline />,
   },
+  {
+    title: 'My profile',
+    href: '/dashboard/profile',
+    icon: <IoPersonOutline />,
+  },
 ]
 
-export const Sidebar = () => {
+export const Sidebar = async () => {
+  const session = await getServerSession(authOption)
+  if (!session) {
+    // redirect('/api/auth/signin')
+  }
+
+  const username = session?.user?.name || 'Guest'
+  const role = 'GUEST'
+  // const role = session?.user?.role || 'Guest'
+  const avatar =
+    session?.user?.image ||
+    'https://tailus.io/sources/blocks/stats-cards/preview/images/second_user.webp'
+
   return (
     <aside className="ml-[-100%] fixed z-10 top-0 pb-3 px-6 w-full flex flex-col justify-between h-screen border-r bg-white transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%]">
       <div>
@@ -57,16 +78,16 @@ export const Sidebar = () => {
 
         <div className="mt-8 text-center">
           <Image
-            src="https://tailus.io/sources/blocks/stats-cards/preview/images/second_user.webp"
+            src={avatar}
             alt=""
             className="w-10 h-10 m-auto rounded-full object-cover lg:w-28 lg:h-28"
             width={100}
             height={100}
           />
           <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">
-            Cynthia J. Watts
+            {username}
           </h5>
-          <span className="hidden text-gray-400 lg:block">Admin</span>
+          <span className="hidden text-gray-400 lg:block">{role}</span>
         </div>
 
         <ul className="space-y-2 tracking-wide mt-8">
@@ -82,10 +103,7 @@ export const Sidebar = () => {
       </div>
 
       <div className="px-6 -mx-6 pt-4 flex justify-center items-center border-t">
-        <button className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group hover:bg-red-500 hover:text-white ease-in-out duration-300">
-          <CiLogout />
-          <span className="group-hover:text-white/80">Logout</span>
-        </button>
+        <LogoutButton />
       </div>
     </aside>
   )

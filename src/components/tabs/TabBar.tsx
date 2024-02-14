@@ -25,7 +25,7 @@ export const TabBar = ({
   return (
     <div
       className={
-        `grid w-full space-x-2 rounded-xl bg-gray-200 p-2 grid-cols-` +
+        `grid w-full space-x-2 rounded-xl bg-gray-300 p-2 grid-cols-5 grid-cols-` +
         tabOptions.length
       }
     >

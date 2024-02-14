@@ -1,7 +1,10 @@
 // Admin Dashboard https://tailwindcomponents.com/component/dashboard-12
-import { Sidebar, TopMenu } from '@/components'
+import { getServerSession } from 'next-auth'
 
-export default function DashboardLayout({
+import { Sidebar, TopMenu } from '@/components'
+import { authOption } from '../api/auth/[...nextauth]/route'
+
+export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode
